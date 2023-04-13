@@ -1,0 +1,192 @@
+//MY ANSWER
+/* CSCI 1105 – Assignment 1
+* Ahmed Rajgoli Shoaib Shakel – B00878695
+* average speed of a rider given the stage's total distance (km) and the rider's time to finish (hours) 
+*/
+import java.util.Scanner;
+
+public class AverageSpeed {
+        public static void main (String[] args){
+
+            double totalDistanceKM, time, totalDistanceMPH, average;
+            final double mph = 0.621371;
+
+            Scanner in = new Scanner(System.in);
+
+            totalDistanceKM = in.nextDouble();
+
+            time = in.nextDouble();
+
+            average = totalDistanceKM/time;
+            totalDistanceMPH = average*mph;
+
+            System.out.println("Average Speed (km/h): "+ average);
+            System.out.println("Average Speed (mph): "+ totalDistanceMPH);
+        }
+}
+
+
+/* CSCI 1105 – Assignment 1
+* Ahmed Rajgoli Shoaib Shakel – B00878695
+* a program to calculate the remaining distance before the rest day after each stage
+*/
+import java.util.Scanner;
+
+public class RestDay {
+    public static void main (String[] args){
+
+        int distance1, distance2, distance3, distance4, distance5, totalDistanceKM,  distanceA,
+            distanceB, distanceC, distanceD;
+        double time, average;
+
+        Scanner in = new Scanner(System.in);
+
+        
+        distance1 = in.nextInt();
+
+        distance2 = in.nextInt();
+
+        distance3 = in.nextInt();
+
+        distance4 = in.nextInt();
+
+        distance5 = in.nextInt();
+
+        time = in.nextDouble();
+
+        totalDistanceKM = distance1 + distance2 + distance3 + distance4 + distance5;
+        average = totalDistanceKM/time;
+        distanceA = totalDistanceKM - distance1;
+        distanceB = distanceA - distance2;
+        distanceC = distanceB - distance3;
+        distanceD = distanceC - distance4;
+
+        System.out.println("End of first stage, "+distanceA +"km left until rest day");
+        System.out.println("End of second stage, " +distanceB +  "km left until rest day");
+        System.out.println("End of third stage, " +distanceC  +"km left until rest day");
+        System.out.println("End of fourth stage, " +distanceD  +"km left until rest day");
+        System.out.println("--REST--");
+        System.out.println("Average speed across the five days: "+ average+ " km/h");
+    }
+}
+
+
+
+/* CSCI 1105 – Assignment 1
+* Ahmed Rajgoli Shoaib Shakel – B00878695
+* identify which of the three stages the rider was the fastest
+*/
+import java.util.Scanner;
+
+public class BestDay {
+        public static void main (String[] args){
+
+        double distance1, distance2, distance3, time1, time2, time3, average1, average2, average3, fastest = 0, fastestSpeed = 0;
+        //int distance1, distance2, distance3;
+        String name;
+
+        Scanner in = new Scanner(System.in);
+
+        name = in.nextLine();
+
+        distance1 = in.nextDouble();
+
+        time1 = in.nextDouble();
+
+        distance2 = in.nextDouble();
+
+        time2 = in.nextDouble();
+
+        distance3 = in.nextDouble();
+
+        time3 = in.nextDouble();
+
+        average1 = distance1/time1;
+        average2 = distance2/time2;
+        average3 = distance3/time3;
+        
+        fastest = Math.max(average1,average3);
+        fastestSpeed = Math.max(fastest,average2);
+
+        System.out.println("\"" +name + "\"" + " fastest speed among the three stages was: " +fastestSpeed + "km/h");
+    }
+}
+
+
+//PROFESSOR'S ANSWER
+import java.util.Scanner;
+
+public class AverageSpeed {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+
+        double distance = kb.nextDouble();
+        double timeToFinish = kb.nextDouble();
+
+        final double kmhToMph = 0.621371;
+
+        System.out.println("Average Speed (km/h): " + distance/timeToFinish);
+        System.out.println("Average Speed (mph): " + distance/timeToFinish*kmhToMph);
+
+    }
+}
+
+
+import java.util.Scanner;
+
+public class RestDay {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+
+        int stage1Distance = kb.nextInt();
+        int stage2Distance = kb.nextInt();
+        int stage3Distance = kb.nextInt();
+        int stage4Distance = kb.nextInt();
+        int stage5Distance = kb.nextInt();
+        double totalTime = kb.nextDouble();
+
+        int totalDistance = stage1Distance + stage2Distance + stage3Distance + stage4Distance + stage5Distance;
+        int distanceLeft = totalDistance;
+
+        distanceLeft -= stage1Distance;
+        System.out.println("End of first stage, "+distanceLeft+"km left until rest day");
+        distanceLeft -= stage2Distance;
+        System.out.println("End of second stage, "+distanceLeft+"km left until rest day");
+        distanceLeft -= stage3Distance;
+        System.out.println("End of third stage, "+distanceLeft+"km left until rest day");
+        distanceLeft -= stage4Distance;
+        System.out.println("End of fourth stage, "+distanceLeft+"km left until rest day");
+
+        System.out.println("--REST--");
+        System.out.println("Average speed across the five days: "+totalDistance/totalTime+" km/h");
+
+
+
+    }
+}
+
+
+import java.util.Scanner;
+
+public class BestDay {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+
+        String name = kb.nextLine();
+        int day1Distance = kb.nextInt();
+        double day1Time = kb.nextDouble();
+        int day2Distance = kb.nextInt();
+        double day2Time = kb.nextDouble();
+        int day3Distance = kb.nextInt();
+        double day3Time = kb.nextDouble();
+
+        double fast = day1Distance/day1Time;
+        fast = Math.max(fast,day2Distance/day2Time);
+        fast = Math.max(fast,day3Distance/day3Time);
+
+        System.out.println("\"" + name+"\" fastest speed among the three stages was: " + fast+ "km/h");
+
+
+
+    }
+}
