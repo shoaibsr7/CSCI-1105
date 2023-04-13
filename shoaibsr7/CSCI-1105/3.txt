@@ -1,0 +1,330 @@
+//MY ANSWER 
+
+/* CSCI 1105 – Assignment 3
+* Ahmed Rajgoli Shoaib Shakel – B00878695
+* This problem checks how many graphic cards were sold and checks if the customer can buy more depending upon how many are in the inventory
+*/
+
+import java.util.Scanner;
+public class P1
+{
+    public static void main(String[] args)
+    {
+        Scanner in = new Scanner (System.in);
+        //take input from the user
+        int sales = in.nextInt();
+        int inventory = 0;
+        
+        while (sales != 0)
+        {
+            //if invetory is < -50 and sales is < 0 
+            if(inventory < -50 && sales <0)
+            {
+                System.out.println("Im sorry, we cannot take new orders as our backorder list is >50");
+            }
+            //else if inventory is > -50 and sales > 0  just add the sales amount to inventory
+            else
+            {
+                inventory += sales;
+            }
+            sales = in.nextInt();
+
+        }//while loop
+        
+        System.out.println("Thank you! Store is now closed.");
+        System.out.println("Inventory: " + inventory);
+        
+    }//class loop
+}//class loop
+
+
+/* CSCI 1105 – Assignment 3
+* Ahmed Rajgoli Shoaib Shakel – B00878695
+* This problem calculates the percentage of vaccinated people in each Atlantic province 
+*/
+import java.util.Scanner;
+
+public class P2 {
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
+
+    //String[] province = {"NS", "NB", "NFL", "PEI"};
+    int newlyVaccinated = in.nextInt();
+    String province = "";
+    int totalPopulation = 0;
+
+    int ns = 0;
+    int nb = 0;
+    int nfl = 0;
+    int pei = 0;
+    //while newlyVaccinated is not equal to zero execute the while loop if eqal to zero come out of the loop
+    while (newlyVaccinated != 0)
+    {
+      province = in.next();
+      //if newlyVaccinated greater than 0 then enter the if statement else ignore the input
+      if (newlyVaccinated > 0) 
+      {
+        if (province.equals("NS")) 
+        {
+          ns += newlyVaccinated;
+        } 
+        else if (province.equals("NB")) 
+        {
+          nb += newlyVaccinated;
+        } 
+        else if (province.equals("NFL")) 
+        {
+          nfl += newlyVaccinated;
+        } 
+        else if (province.equals("PEI")) 
+        {
+          pei += newlyVaccinated;
+        }
+      }//if statement
+      newlyVaccinated = in.nextInt();
+    }//while loop
+
+    int nsPopulation = 0;
+    int nbPopulation = 0;
+    int nflPopulation = 0;
+    int peiPopulation = 0;
+
+    for (int i=0; i<4; i++)
+    {
+      totalPopulation = in.nextInt();
+      province = in.next();
+      
+      if (province.equals("NS")) 
+      {
+        nsPopulation = totalPopulation;
+      } 
+      else if (province.equals("NB")) 
+      {
+        nbPopulation = totalPopulation;
+      } 
+      else if (province.equals("NFL")) 
+      {
+        nflPopulation = totalPopulation;
+      } 
+      else if (province.equals("PEI")) 
+      {
+        peiPopulation = totalPopulation;
+      }
+    }//for loop
+
+    double populationVaccinatedNS = 0;
+    double populationVaccinatedNB = 0;
+    double populationVaccinatedNFL = 0;
+    double populationVaccinatedPEI = 0;
+
+    populationVaccinatedNS = (double) ns/nsPopulation * 100;
+    populationVaccinatedNB = (double) nb/nbPopulation * 100;
+    populationVaccinatedNFL = (double) nfl/nflPopulation * 100;
+    populationVaccinatedPEI = (double) pei/peiPopulation * 100;
+    
+    //printf syntax width.decimal (width is total number of places the number is going to occupy)
+    System.out.printf("%06.2f%% of NS's is vaccinated\n", populationVaccinatedNS);
+    System.out.printf("%06.2f%% of NB's is vaccinated\n", populationVaccinatedNB);
+    System.out.printf("%06.2f%% of NFL's is vaccinated\n", populationVaccinatedNFL);
+    System.out.printf("%06.2f%% of PEI's is vaccinated\n", populationVaccinatedPEI);
+    
+    boolean noneBelowQuota = true;
+
+    System.out.print("Province(s) bellow vaccination quotas: ");
+    //checking if each province has vaccination % less than 80 
+    if(populationVaccinatedNS < 80)
+    {
+      noneBelowQuota = false;
+      System.out.print("NS ");
+    }
+    if(populationVaccinatedNB < 80)
+    {
+      noneBelowQuota = false;
+      System.out.print("NB ");
+    }
+    if(populationVaccinatedNFL < 80)
+    {
+      noneBelowQuota = false;
+      System.out.print("NFL ");
+    }
+    if(populationVaccinatedPEI < 80)
+    {
+      noneBelowQuota = false;
+      System.out.print("PEI ");
+    }
+    if(noneBelowQuota) {
+      System.out.print("None");
+    }//end
+  }
+}
+
+
+//PROFESSOR'S ANSWER
+
+import java.util.Scanner;
+
+/**
+ * Assignment 03 - CSCI 1105 F2020
+ * @author Juliano Franz
+ *
+ * The graphics card manufacturer Nvidia was recently criticized by the way they managed their
+ * inventory of the newly release RTX 3080 and 3090 graphics cards.
+ *
+ * To help Nivida, you will create a program that keep track of sales and restock of Nvidia's 3080 graphics cards.
+ * Your program will keep a record of the current inventory of the cards and it will not allow purchases
+ * when there are more than 50 cards (included) in backorder
+ *
+ * Your program will read integers representing either restocks (adding new items to the inventory) or sales
+ * until it reads a 0 telling it to close the store and report.
+ *  - Positive integers mean that new cards arrived in the stock (that is an increase in the inventory)
+ *  - Negative integers mean that the store sold cards that day
+ *  - '0' means that the store is closed, and you should print how many cards are left in stock or how many are in
+ *     backorder, that is, cards that customers payed for but haven't received the product yet.
+ *
+ * Backorder policy: If they have more than 50 cards (included) in back order the store will refuse to sell new cards
+ * until the inventory has been restocked to less than 50 cards in backorder. If a customer tries to purchase a card
+ * in this situation, your program should print an error message according to the example bellow.
+ *
+ * The store always open with a zero inventory of cards
+ */
+public class P1 {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+
+        int inventory = 0;
+
+        //What is the operation? Sell or Buy?
+        int cardFlow = kb.nextInt();
+        while (cardFlow != 0){
+            //Because of short circuit evaluation I don't have to check cardflow <0 in the right hand part of the ||
+            if(cardFlow > 0 || inventory >= -50){
+                inventory += cardFlow;
+            }
+            else{
+                System.out.println("Im sorry, we cannot take new orders as our backorder list is >50");
+            }
+            cardFlow = kb.nextInt();
+        }
+
+        System.out.println("Thank you! Store is now closed.\nInventory: " + inventory);
+    }
+}
+
+
+
+import java.util.Scanner;
+
+/**
+ * Assignment 03 - CSCI 1105 F2020
+ * @author Juliano Franz
+ *
+ * Calculate % of the population is vacinnated against the flu for the 4 atlantic provinces.
+ * Read in daily numbers (numbers must be positive, ignore negative), province (NS, NFL, NB, PEI)(always correct)
+ *   until the user inputs 0. Then read total population for each province.
+ *
+ * Print the % of the population for each province and for the atlantic provicens as a role.
+ *   If a province is bellow 80% vacinate issue a warning.
+ *
+ * Input EX: 10 NS 40 PEI 399 NFL 409 NS 309 NB 0 923598 NS 142907 PEI 519716 NFL 747101
+ */
+
+public class P2 {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+
+        //For the sake of clarity lets create a constant variable for the warning level
+        final double LOW_VACCINATION_WARNING = 0.80;
+
+        //Let's use one variable for each province to keep track of the vacinated
+        int vaccinatedNS = 0;
+        int vaccinatedNB = 0;
+        int vaccinatedPEI = 0;
+        int vaccinatedNFL = 0;
+
+        //We will always read numbers and provinces until we read a 0.
+        int dayCount = -1;
+        while (dayCount != 0){
+
+            //Read day count and province. Ignore province if dayCount == 0 though
+            dayCount = kb.nextInt();
+            if(dayCount != 0){
+                String province = kb.next();
+                if(dayCount >0){
+                    switch (province){
+                        case "NS":
+                            vaccinatedNS += dayCount;
+                            break;
+                        case "NB" :
+                            vaccinatedNB += dayCount;
+                            break;
+                        case "PEI":
+                            vaccinatedPEI += dayCount;
+                            break;
+                        case "NFL":
+                            vaccinatedNFL += dayCount;
+                            break;
+                    }
+                }
+            }
+        }
+
+        int populationNS = 0;
+        int populationNB = 0;
+        int populationPEI = 0;
+        int populationNFL = 0;
+
+        //Read in current population of each province
+        for (int i = 0; i < 4; i++) {
+            int pop = kb.nextInt();
+            //I will use "ifs" instead of switches here to show that it doesn't matter which on you choose
+            //Note that I am declaring a new variable with the same name as above but they are on two different scopes
+            String province = kb.next();
+            if(province.equals("NS")){
+                populationNS = pop;
+            }
+            else if(province.equals("NB")){
+                populationNB = pop;
+            }
+            else if(province.equals("NFL")){
+                populationNFL = pop;
+            }
+            else {
+                populationPEI = pop;
+            }
+        }
+
+        //Print statistics, two decimal points, 3 0 left padding (total width of 6)
+        System.out.printf("%06.2f%% of NS's is vaccinated\n",((double)vaccinatedNS/populationNS) * 100);
+        System.out.printf("%06.2f%% of NB's is vaccinated\n",((double)vaccinatedNB/populationNB)* 100);
+        System.out.printf("%06.2f%% of NFL's is vaccinated\n",((double)vaccinatedNFL/populationNFL)* 100);
+        System.out.printf("%06.2f%% of PEI's is vaccinated\n",((double)vaccinatedPEI/populationPEI)* 100);
+
+        //Issue the warnings as needed
+        boolean provinceBellowQuota = false;
+        System.out.print("Province(s) bellow vaccination quotas: ");
+
+        if((double)vaccinatedNS/populationNS < LOW_VACCINATION_WARNING){
+            System.out.print("NS ");
+            provinceBellowQuota = true;
+        }
+        if((double)vaccinatedNB/populationNB < LOW_VACCINATION_WARNING){
+            System.out.print("NB ");
+            provinceBellowQuota = true;
+        }
+        if((double)vaccinatedNFL/populationNFL < LOW_VACCINATION_WARNING){
+            System.out.print("NFL ");
+            provinceBellowQuota = true;
+        }
+        if((double)vaccinatedPEI/populationPEI < LOW_VACCINATION_WARNING){
+            System.out.print("PEI ");
+            provinceBellowQuota = true;
+        }
+        if(!provinceBellowQuota){
+            System.out.println("None");
+        }
+
+
+
+    }
+}
+
