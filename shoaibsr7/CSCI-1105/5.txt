@@ -1,0 +1,177 @@
+import java.util.Scanner;
+
+public class P4 {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+        //(Starter)Q4
+        final int ADD_OP = 1;
+        final int SEARCH_OP = 2;
+        final int REMOVE_INDEX_OP = 3;
+        final int REMOVE_NAME_OP = 4;
+        final int PRINT_OP = 5;
+
+        String[] nameList = new String[30];
+        int entryCount = 0;
+        System.out.print("Welcome!\nPlease Select an option: ");
+        int selectedOption =  kb.nextInt();
+
+        while (selectedOption != 0){
+            if(selectedOption == ADD_OP){
+                //We just read an int, therefore we need to get rid of the \n that is left there
+                kb.nextLine();
+
+                if(entryCount == 30){
+                    System.out.println("The list is full!");
+                }
+                else {
+                    System.out.println("What's the name? ");
+                    String name = kb.nextLine();
+                    //No duplicates allowed
+                    if(containsElement(name,nameList) < 0) {
+                        addItem(name, nameList, entryCount);
+                        entryCount++;
+                    }
+                    else {
+                        System.out.println("Name already on the list");
+                    }
+                }
+            }
+            else if(selectedOption == SEARCH_OP){
+                kb.nextLine();
+
+                System.out.println("What is the name you are looking for (exact match): ");
+                String name = kb.nextLine();
+                if(containsElement(name,nameList) >= 0){
+                    System.out.println("The person is in the list");
+                }
+                else {
+                    System.out.println("This person is not in the list");
+                }
+            }
+            else if(selectedOption == REMOVE_INDEX_OP){
+                System.out.println("What is the index? ");
+                int index = kb.nextInt();
+                if(removeItem(index,nameList)) {
+                    entryCount--;
+                }
+
+            }
+            else if(selectedOption == REMOVE_NAME_OP) {
+                kb.nextLine();
+                System.out.println("Name to remove (exact match): ");
+                String name = kb.nextLine();
+                int index = containsElement(name,nameList);
+                if(index >= 0){
+                    removeItem(index,nameList);
+                    entryCount--;
+                }
+                else {
+                    System.out.println("Name not found");
+                }
+            }
+            else if(selectedOption == PRINT_OP){
+                System.out.println(toStringWithSeparator(nameList, '$'));
+            }
+
+            System.out.println("Please Select an option: ");
+            selectedOption = kb.nextInt();
+        }
+
+
+
+    }
+
+    /**
+     * Method used to check if an element is present in the array of strings
+     * @param element the text we are looking for
+     * @param array the array containing the data
+     * @return the index of the element of -1 if the element is not present
+     */
+    public static int containsElement(String element, String[] array){
+        //Q1
+        for (int i = 0; i < array.length; i++) {
+            if(element.equals(array[i])){
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    /**
+     * Adds new Strings to the array. Strings are added in order
+     * @param array the array we are trying to add new information
+     * @param elementCount the current count of how many elements are in the array
+     * @return true if there was space and the element was added, false otherwise
+     */
+    public static boolean addItem(String name, String[] array, int elementCount){
+        //Q2
+        if(elementCount == array.length){
+            return false;
+        }
+
+        if(elementCount == 0){
+            array[0] = name;
+            return true;
+        }
+
+        for (int i = 0; i < elementCount; i++) {
+            if(name.compareTo(array[i]) < 0){
+                for (int j = elementCount; j > i; j--) {
+                    array[j] = array[j-1];
+                }
+
+                array[i] = name;
+                break;
+            }
+            if(array[elementCount] == null) {
+                array[elementCount] = name;
+            }
+        }
+
+        return true;
+    }
+
+
+    /**
+     * Removes an element from the array at a specified location. Removal is in order
+     * @param index the index of the element we are trying to remove
+     * @param array the array containing the data
+     * @return returns true if the element was removed, false if the index was out of bounds
+     */
+    public static boolean removeItem(int index, String[] array){
+       //Q2
+       if(index <0 || index >= array.length){
+           return false;
+       }
+
+        for (int i = index; i < array.length-1; i++) {
+            array[i] = array[i+1];
+        }
+
+        return true;
+    }
+
+    /**
+     * Creates a string representation of the array with elements separated by a specified character
+     * @param array the array containing the data we want to print
+     * @param separator the separator character
+     * @return the array represented in a String
+     */
+    public static String toStringWithSeparator(String[] array, char separator){
+        //Q3
+        String result = "";
+        for (int i = 0; i < array.length; i++) {
+            if(array[i] == null){
+                continue;
+            }
+            if(i != 0){
+                result += separator;
+            }
+            result += array[i];
+        }
+
+        return result;
+    }
+
+}
