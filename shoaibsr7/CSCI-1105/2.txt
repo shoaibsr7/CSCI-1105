@@ -1,0 +1,603 @@
+//MY ANSWER
+
+/* CSCI 1105 – Assignment 2
+* AHMED RAJGOLI SHOAIB SHAKEEL – B00878695
+* The program read the product information and quantity to calculate the related sales tax
+*/
+
+import java.util.Scanner;
+
+public class Problem1 {
+    public static void main (String[] args){
+        Scanner in = new Scanner (System.in);
+
+        //read input from the user and initializing
+        
+        double tax=0, total = 0;
+        
+        String productName = in.next();
+        String productName1 = productName.toLowerCase();
+
+        int category = in.nextInt();
+
+        double price = in.nextDouble();
+
+        int quantity = in.nextInt();
+
+        total = price*quantity;
+        
+        // if the category is less than or equal to 3 it enters the if statement otherwise it enters the else statement
+        
+        if (category <= 3)
+        {
+            if (category == 0)
+            {
+                total += tax;
+            }
+            else if (category == 1)
+            {
+                total += tax;
+            }
+            else if (category == 2)
+            {
+                tax =  price * quantity * 5.0 / 100;
+                total = (price*quantity) + tax;
+            }
+            else if (category == 3)
+            {
+                if (productName1.equals("water"))
+                {
+                    tax = 0;
+                }
+                else
+                {
+                    tax = price * quantity * 0.15;
+                    total = (price*quantity) + tax;
+                }
+
+            }
+            
+            //printing the output the user entered
+            
+            System.out.println("Item: "+productName);
+
+            System.out.printf("Cost: %.2f CAD",price);
+            System.out.println();
+
+            System.out.println("Quantity: "+quantity);
+
+            System.out.printf("Tax: %.2f CAD",tax);
+            System.out.println();
+
+            System.out.printf("Total: %.2f CAD",total);
+        }
+        else
+        {
+            System.out.println("Invalid category, please start again");
+        }
+
+
+    }
+
+}
+
+
+
+/* CSCI 1105 – Assignment 2
+* AHMED RAJGOLI SHOAIB SHAKEEL – B00878695
+* The program read the product information and quantity to calculate the related sales tax along and applies special discounts if the person buy multiple items of the same product
+*/
+
+import java.util.Scanner;
+
+public class Problem2 {
+    public static void main(String[] args) {
+        
+        Scanner in = new Scanner(System.in);
+        
+        //reading input from the user and initializing
+
+        double tax = 0, total = 0, discount = 0;
+
+        String productName = in.next();
+
+        int category = in.nextInt();
+
+        double price = in.nextDouble();
+
+        int quantity = in.nextInt();
+        
+        boolean multiDiscount = false;
+
+        total = price * quantity;
+        
+        /*if the category is more than 3 it prints INVALID, if the category is less than or equal to 3 it enters the if statement after entering 
+        the if statements it checks if the quantity matches the minimum amount for social discount, if multidiscount is true discount is given*/
+        
+        if (category > 3)
+        {
+            System.out.println("Invalid category, please start again");
+        }
+
+        else if (category <= 3)
+        {
+            if (category == 0)
+            {
+                tax = 0;
+                
+                if (quantity < 4)
+                {
+                    discount = 0;
+                    total += tax;
+                }
+                
+                else if (quantity > 5 && quantity < 10)
+                {
+                    discount = price * quantity * 10 / 100;
+                    total = total + tax - discount;
+                    multiDiscount = true;
+                }
+                
+                else if (quantity >= 11)
+                {
+                    discount = price * quantity * 15 / 100;
+                    total = total + tax - discount;
+                    multiDiscount = true;
+                }
+            }
+            else if (category == 1)
+            {
+                tax = 0;
+                
+                if (quantity < 2)
+                {
+                    discount = 0;
+                    total += tax;
+                }
+                
+                else if (quantity > 3 && quantity < 7)
+                {
+                    discount = price * quantity * 3 / 100;
+                    total = total + tax - discount;
+                    multiDiscount = true;
+                }
+                
+                else if (quantity >= 8)
+                {
+                    discount = price * quantity * 5 / 100;
+                    total = total + tax - discount;
+                    multiDiscount = true;
+                }
+            }
+            else if (category == 2)
+            {
+                tax = price * quantity * 5.0 / 100;
+                total = (price * quantity) + tax;
+            }
+            
+            else if (category == 3)
+            {
+                tax = 15 / 100;
+                tax = price * quantity * 15.0 / 100;
+                total = (price * quantity) + tax;
+            }
+            
+            
+            System.out.println("Item: " + productName);
+            
+            if(multiDiscount == false)
+            {
+                System.out.printf("Cost: %.2f CAD", price);
+            }
+            else
+            {
+                System.out.printf("Cost: %.2f CAD (MULTI DISCOUNT)", price);
+            }
+            
+            System.out.println();
+
+            System.out.println("Quantity: " + quantity);
+
+            System.out.printf("Tax: %.2f CAD", tax);
+            System.out.println();
+
+            System.out.printf("Total: %.2f CAD", total);
+        }
+            
+    }
+}
+
+
+/* CSCI 1105 – Assignment 2
+* AHMED RAJGOLI SHOAIB SHAKEEL – B00878695
+* The program read the product information and quantity to calculate the related sales tax along and applies special discounts if the person buy multiple items of the same product
+*/
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Problem3 {
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+
+        //initializing variables
+
+        double tax = 0, total = 0, discount = 0;
+        
+        //using try catch block to catch wrong input error, if user inputs wrong input Invalid input message is printed 
+        
+        try {
+            //reading input from the user
+
+            String productName = in.next();
+
+            int category = in.nextInt();
+
+            double price = in.nextDouble();
+
+            int quantity = in.nextInt();
+
+            boolean multiDiscount = false;
+
+            total = price * quantity;
+
+            if (category > 3) {
+                System.out.println("Invalid category, please start again");
+            } else if (category <= 3) {
+                if (category == 0) {
+                    tax = 0;
+
+                    if (quantity < 4) {
+                        discount = 0;
+                        total += tax;
+                    } else if (quantity > 5 && quantity < 10) {
+                        discount = price * quantity * 10 / 100;
+                        total = total + tax - discount;
+                        multiDiscount = true;
+                    } else if (quantity >= 11) {
+                        discount = price * quantity * 15 / 100;
+                        total = total + tax - discount;
+                        multiDiscount = true;
+                    }
+                } else if (category == 1) {
+                    tax = 0;
+
+                    if (quantity < 2) {
+                        discount = 0;
+                        total += tax;
+                    } else if (quantity > 3 && quantity < 7) {
+                        discount = price * quantity * 3 / 100;
+                        total = total + tax - discount;
+                        multiDiscount = true;
+                    } else if (quantity >= 8) {
+                        discount = price * quantity * 5 / 100;
+                        total = total + tax - discount;
+                        multiDiscount = true;
+                    }
+                } else if (category == 2) {
+                    tax = price * quantity * 5.0 / 100;
+                    total = (price * quantity) + tax;
+                } else if (category == 3) {
+                    tax = 15 / 100;
+                    tax = price * quantity * 15.0 / 100;
+                    total = (price * quantity) + tax;
+                }
+
+
+                System.out.println("Item: " + productName);
+
+                if (multiDiscount == false) {
+                    System.out.printf("Cost: %.2f CAD", price);
+                } else {
+                    System.out.printf("Cost: %.2f CAD (MULTI DISCOUNT)", price);
+                }
+
+                System.out.println();
+
+                System.out.println("Quantity: " + quantity);
+
+                System.out.printf("Tax: %.2f CAD", tax);
+                System.out.println();
+
+                System.out.printf("Total: %.2f CAD", total);
+            }
+        }
+        catch(InputMismatchException x){
+            System.out.println("Invalid input type! Java expects that you type the correct type");
+        }
+
+    }
+}
+
+
+
+
+
+
+
+//PROFESSOR'S ANSWER
+
+/**
+    CSCI 1105 - Summer 2020
+    @author: Juliano Franz
+    Assignment 02, Problem 1 Solution
+ */
+
+import java.util.Scanner;
+
+public class Problem1 {
+    public static void main(String[] args) {
+        final int PRODUCE = 0;
+        final int DAIRY = 1;
+        final int PROCESSED = 2;
+        final int DRINKS = 3;
+
+        Scanner kb = new Scanner(System.in);
+
+        //We need to keep tally of the original price and the price after tax
+        double totalPriceBeforeTax = 0;
+        double totalPriceAfterTax = 0;
+
+        //Read name, category, price quantity. All in the same line
+        String productName = kb.next();
+        int category = kb.nextInt();
+        double price = kb.nextDouble();
+        int quantity = kb.nextInt();
+
+        totalPriceBeforeTax = price * quantity;
+
+        //Let's ensure that the category is within the correct range [0-3]
+        //We could use category >=0 && category <4 to reduce nesting too
+        //Another option (ideal?) is to return inside the if statement. Students haven't seen that yet
+        if(category < PRODUCE || category >DRINKS){
+            System.out.println("Invalid category, please start again");
+        }
+        else {
+
+        /* Calculate Tax. Rules:
+             0% for produce and dairy
+             5% for processed
+             15% for drinks unless it is water
+         */
+
+            //Assume product has no tax to reduce the numbers of if statements
+            totalPriceAfterTax = totalPriceBeforeTax;
+            if (category == PROCESSED) {
+                totalPriceAfterTax = totalPriceBeforeTax * 1.05;
+            }
+            //Assume input is always correct in this problem
+            else if (category == DRINKS && !productName.equalsIgnoreCase("water")) {
+                totalPriceAfterTax = totalPriceBeforeTax * 1.15;
+            }
+
+
+            //Print price information
+            System.out.println("Item: " + productName);
+            System.out.printf("Cost: %.2f CAD\n",price);
+            System.out.println("Quantity: " + quantity);
+            System.out.printf("Tax: %.2f CAD\n",(totalPriceAfterTax - totalPriceBeforeTax));
+            System.out.printf("Total: %.2f CAD", totalPriceAfterTax);
+        }
+
+    }
+}
+
+
+/**
+ CSCI 1105 - Summer 2020
+ @author: Juliano Franz
+ Assignment 02, Problem 2 Solution
+ */
+
+
+import java.util.Scanner;
+
+public class Problem2 {
+    public static void main(String[] args) {
+        final int PRODUCE = 0;
+        final int DAIRY = 1;
+        final int PROCESSED = 2;
+        final int DRINKS = 3;
+
+        Scanner kb = new Scanner(System.in);
+
+        //We need to keep tally of the original price and the price after tax
+        double totalPriceBeforeTax = 0;
+        double totalPriceAfterTax = 0;
+
+        //Read name, category, price quantity. All in the same line
+        String productName = kb.next();
+        int category = kb.nextInt();
+        double price = kb.nextDouble();
+        int quantity = kb.nextInt();
+
+        totalPriceBeforeTax = price * quantity;
+
+        //Let's ensure that the category is within the correct range [0-3]
+        //Since this is P2 I will use return to reduce nesting and show as an example
+        if(category < 0 || category >3){
+            System.out.println("Invalid category, please start again");
+            return;
+        }
+
+        /* Problem 2 has discount for multiple items
+        Produce: 0-4 0%, 5-10: 10%, 11: 15%
+        Dairy: 0-2 0%, 3-7: 3%, 8: 5%
+        */
+
+        //Let's assume most people will not get the discount
+        boolean multiDiscountApplied = false;
+
+        if(category == PRODUCE){
+            if(quantity >4 && quantity < 11){
+                totalPriceBeforeTax *= .9;
+                multiDiscountApplied = true;
+            }
+            else if(quantity >10){
+                totalPriceBeforeTax *= .85;
+                multiDiscountApplied = true;
+            }
+        }
+        else if(category == DAIRY){
+            if(quantity >2 && quantity < 8){
+                totalPriceBeforeTax *= .97;
+                multiDiscountApplied = true;
+            }
+            else if(quantity >7){
+                totalPriceBeforeTax *= .95;
+                multiDiscountApplied = true;
+            }
+        }
+
+
+
+        //Assume product has no tax to reduce the numbers of if statements
+        totalPriceAfterTax = totalPriceBeforeTax;
+
+        /* Calculate Tax. Rules:
+             0% for produce and dairy
+             5% for processed
+             15% for drinks unless it is water
+         */
+
+
+        if (category == PROCESSED) {
+            totalPriceAfterTax = totalPriceBeforeTax * 1.05;
+        }
+        //Assume input is always correct in this problem
+        else if (category == DRINKS && !productName.equalsIgnoreCase("water")) {
+            totalPriceAfterTax = totalPriceBeforeTax * 1.15;
+        }
+
+
+        //Print price information
+        System.out.println("Item: " + productName);
+        if(multiDiscountApplied){
+            System.out.printf("Cost: %.2f CAD (MULTI DISCOUNT)\n",price);
+        }
+        else {
+            System.out.printf("Cost: %.2f CAD\n",price);
+        }
+        System.out.println("Quantity: " + quantity);
+        System.out.printf("Tax: %.2f CAD\n",(totalPriceAfterTax - totalPriceBeforeTax));
+        System.out.printf("Total: %.2f CAD", totalPriceAfterTax);
+
+
+
+    }
+}
+
+
+/**
+ CSCI 1105 - Summer 2020
+ @author: Juliano Franz
+ Assignment 02, Problem 3 (BONUS) Solution
+ */
+
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Problem3 {
+    public static void main(String[] args) {
+        final int PRODUCE = 0;
+        final int DAIRY = 1;
+        final int PROCESSED = 2;
+        final int DRINKS = 3;
+
+        Scanner kb = new Scanner(System.in);
+
+        //We need to keep tally of the original price and the price after tax
+        double totalPriceBeforeTax = 0;
+        double totalPriceAfterTax = 0;
+
+        //Read name, category, price quantity. All in the same line
+        String productName;
+        int category;
+        double price;
+        int quantity;
+
+        //Bonus. They should learn by themselves the try catch AGAIN BONUS
+        try {
+            productName = kb.next();
+            category = kb.nextInt();
+            price = kb.nextDouble();
+            quantity = kb.nextInt();
+        }
+        catch (InputMismatchException e){
+            System.out.println("Invalid input type! Java expects that you type the correct type");
+            return;
+        }
+
+        totalPriceBeforeTax = price * quantity;
+
+        //Let's ensure that the category is within the correct range [0-3]
+        //Since this is P2 I will use return to reduce nesting and show as an example
+        if(category < 0 || category >3){
+            System.out.println("Invalid category, please start again");
+            return;
+        }
+
+        /* Problem 2 has discount for multiple items
+        Produce: 0-4 0%, 5-10: 10%, 11: 15%
+        Dairy: 0-2 0%, 3-7: 3%, 8: 5%
+        */
+
+        //Let's assume most people will not get the discount
+        boolean multiDiscountApplied = false;
+
+        if(category == PRODUCE){
+            if(quantity >4 && quantity < 11){
+                totalPriceBeforeTax *= .9;
+                multiDiscountApplied = true;
+            }
+            else if(quantity >10){
+                totalPriceBeforeTax *= .85;
+                multiDiscountApplied = true;
+            }
+        }
+        else if(category == DAIRY){
+            if(quantity >2 && quantity < 8){
+                totalPriceBeforeTax *= .97;
+                multiDiscountApplied = true;
+            }
+            else if(quantity >7){
+                totalPriceBeforeTax *= .95;
+                multiDiscountApplied = true;
+            }
+        }
+
+
+        //Assume product has no tax to reduce the numbers of if statements
+        totalPriceAfterTax = totalPriceBeforeTax;
+
+        /* Calculate Tax. Rules:
+             0% for produce and dairy
+             5% for processed
+             15% for drinks unless it is water
+         */
+
+
+        if (category == PROCESSED) {
+            totalPriceAfterTax = totalPriceBeforeTax * 1.05;
+        }
+        //Assume input is always correct in this problem
+        else if (category == DRINKS && !productName.equalsIgnoreCase("water")) {
+            totalPriceAfterTax = totalPriceBeforeTax * 1.15;
+        }
+
+
+        //Print price information
+        System.out.println("Item: " + productName);
+        if(multiDiscountApplied){
+            System.out.printf("Cost: %.2f CAD (MULTI DISCOUNT)\n",price);
+        }
+        else {
+            System.out.printf("Cost: %.2f CAD\n",price);
+        }
+        System.out.println("Quantity: " + quantity);
+        System.out.printf("Tax: %.2f CAD\n",(totalPriceAfterTax - totalPriceBeforeTax));
+        System.out.printf("Total: %.2f CAD", totalPriceAfterTax);
+    }
+}
