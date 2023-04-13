@@ -1,0 +1,603 @@
+//MY ANSWER 
+
+/*
+CSCI 1105 – Assignment 4
+Ahmed Rajgoli Shoaib Shakeel – B00878695
+This program stores the contact info of 256 people and prints them.
+*/
+import java.util.Scanner;
+public class P1 {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Welcome!");
+        String[][] contacts = new String[256][2];
+        int rows = contacts.length;
+        int counter = 0;
+        boolean RolodexFull = false;
+        int option = 1;
+
+        while(option != 0)//enter the while loop only when the option is not 0
+        {
+            System.out.println("Please Select an option: ");
+            option = in.nextInt();
+
+            if (option == 1)
+            {
+                if (counter == contacts.length)//if rolodex full that is 256 already stored print "Full"
+                {
+                    RolodexFull = true;
+                    System.out.println("Rolodex is full!");
+                }
+                if (!RolodexFull) //if rolodexFull is false it's NOT becomes true and only then it will satisfy the if condition
+                {
+                    for (int i = 0; i < rows; i++)
+                    {
+                        if (contacts[i][0] == null)//we check if the array index if filled or not if it is null we enter the name e-mail
+                        {
+                            in.skip("\n");//this skips the left over \n after we enter "option"
+
+                            System.out.println("What's the name? ");
+                            contacts[i][0] = in.nextLine();
+
+                            System.out.println("What's the e-mail? ");
+                            contacts[i][1] = in.nextLine();
+
+                            counter++;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            else if(option == 5)
+            {
+                for (int i = 0; i < counter; i++)
+                {
+                    System.out.println("Name: " + contacts[i][0]);
+                    System.out.println("e-mail: " + contacts[i][1]);
+                    System.out.println("--------------------");
+                }
+            }
+        }//end of while loop
+        System.out.println("Thank you! Have a nice day!");
+    }//class
+}
+
+
+/*
+CSCI 1105 – Assignment 4
+Ahmed Rajgoli Shoaib Shakeel – B00878695
+This program searches for a contact name and prints their e-mail.
+*/
+import java.util.Scanner;
+public class P2 {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Welcome!");
+        String[][] contacts = new String[256][2];
+        int rows = contacts.length;
+        int counter = 0;
+        boolean RolodexFull = false;
+        int option = 1;
+
+        while(option != 0)//enter the while loop only when the option is not 0
+        {
+            System.out.println("Please Select an option: ");
+            option = in.nextInt();
+
+            if (option == 1)
+            {
+                if (counter == contacts.length)//if rolodex full that is 256 already stored print "Full"
+                {
+                    RolodexFull = true;
+                    System.out.println("Rolodex is full!");
+                }
+                if (!RolodexFull) //if rolodexFull is false it's NOT becomes true and only then it will satisfy the if condition
+                {
+                    for (int i = 0; i < rows; i++)
+                    {
+                        if (contacts[i][0] == null)//we check if the array index if filled or not if it is null we enter the name e-mail
+                        {
+                            in.skip("\n");//this skips the left over \n after we enter "option"
+
+                            System.out.println("What's the name? ");
+                            contacts[i][0] = in.nextLine();
+
+                            System.out.println("What's the e-mail? ");
+                            contacts[i][1] = in.nextLine();
+
+                            counter++;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            else if(option == 5)
+            {
+                for (int i = 0; i < counter; i++)
+                {
+                    System.out.println("Name: " + contacts[i][0]);
+                    System.out.println("e-mail: " + contacts[i][1]);
+                    System.out.println("--------------------");
+                }
+            }
+
+            else if(option == 2)
+            {
+                in.skip("\n");
+                System.out.println("What is the name you are looking for (exact match): ");
+                String name = in.nextLine();
+                boolean nameNotFound = false;
+                
+                for (int i = 0; i < counter; i++)
+                {
+                    if(contacts[i][0].equals(name) && !nameNotFound)//if contact name and the entered name is same and NOT nameNotFound then enter the if statment
+                    {
+                        System.out.println("E-mail: " + contacts[i][1]);//print email if name matched else print name not found
+                        nameNotFound = true;
+                    }
+                }
+                if(!nameNotFound)
+                {
+                    System.out.println("Name not found!");
+                }
+            }
+        }//end of while loop
+        System.out.println("Thank you! Have a nice day!");
+    }//class
+}
+
+
+/*
+CSCI 1105 – Assignment 4
+Ahmed Rajgoli Shoaib Shakeel – B00878695
+This program searches for a contact name by index and name and removes it.
+*/
+import java.util.Scanner;
+public class P3 {
+  public static void main(String[] args) {
+    Scanner in = new Scanner(System.in);
+
+    System.out.println("Welcome!");
+    String[][] contacts = new String[256][2];
+    int rows = contacts.length;
+    int counter = 0;
+    boolean RolodexFull = false;
+    int option = 1;
+
+    while(option != 0)//enter the while loop only when the option is not 0
+    {
+      System.out.println("Please Select an option: ");
+      option = in.nextInt();
+
+      if (option == 1)
+      {
+        if (counter == contacts.length)//if rolodex full that is 256 already stored print "Full"
+        {
+          RolodexFull = true;
+          System.out.println("Rolodex is full!");
+        }
+        if (!RolodexFull) //if rolodexFull is false it's NOT becomes true and only then it will satisfy the if condition
+        {
+          for (int i = 0; i < rows; i++)
+          {
+            if (contacts[i][0] == null)//we check if the array index if filled or not if it is null we enter the name e-mail
+            {
+              in.skip("\n");//this skips the left over \n after we enter "option"
+
+              System.out.println("What's the name? ");
+              contacts[i][0] = in.nextLine();
+
+              System.out.println("What's the e-mail? ");
+              contacts[i][1] = in.nextLine();
+
+              counter++;
+              break;
+            }
+          }
+        }
+      }
+
+      else if(option == 5)//print name and email
+      {
+        for (int i = 0; i < counter; i++)
+        {
+          System.out.println("Name: " + contacts[i][0]);
+          System.out.println("e-mail: " + contacts[i][1]);
+          System.out.println("--------------------");
+        }
+      }
+
+      else if(option == 2)//search for name and print the email
+      {
+        in.skip("\n");
+        System.out.println("What is the name you are looking for (exact match): ");
+        String name = in.nextLine();
+        boolean nameNotFound = false;
+
+        for (int i = 0; i < counter; i++)
+        {
+          if(contacts[i][0].equals(name) && !nameNotFound)//if contact name and the entered name is same and NOT nameNotFound then enter the if statement
+          {
+            System.out.println("E-mail: " + contacts[i][1]);//print email if name matched else print name not found
+            nameNotFound = true;
+          }
+        }
+        if(!nameNotFound)
+        {
+          System.out.println("Name not found!");
+        }
+      }
+
+      else if(option == 3)//remove by index
+      {
+        System.out.println("What is the index? ");
+        int index = in.nextInt();
+        for (int i = index + 1; i < counter; i++)
+        {
+          contacts[i -1][0] = contacts[i][0]; //shift the elements one place back and then make the element at i null and the next element is stored in the null and so on
+          contacts[i -1][1] = contacts[i][1];
+          contacts[i][0] = null;
+          contacts[i][1] = null;
+        }
+        counter--;
+      }
+
+      else if(option == 4)//remove by name
+      {
+        in.skip("\n");
+        System.out.println("Name to remove (exact match): ");
+        String nameToRemove = in.nextLine();
+        boolean nameNotFound = false;
+
+        for (int i = 0; i < counter; i++)
+        {
+          if(contacts[i][0].equals(nameToRemove))//if contact name and the entered name is same and NOT nameNotFound then enter the if statement
+          {
+            for (int j = i+1; j < counter; j++)
+            {
+              contacts[j - 1][0] = contacts[j][0]; //shift the elements one place back and then make the element at j null and the next element is stored in the null and so on
+              contacts[j - 1][1] = contacts[j][1];
+              contacts[j][0] = null;
+              contacts[j][1] = null;
+            }
+            counter-=1;
+            nameNotFound = true;
+            break;
+          }
+        }
+        if(!nameNotFound)
+        {
+          System.out.println("Name not found!");
+        }
+      }
+    }//end of while loop
+    System.out.println("Thank you! Have a nice day!");
+  }//class
+}
+
+
+//PROFESSOR'S ANSWER
+
+
+import java.util.Scanner;
+
+/**
+ * CSCI 1105 F2020 - A4, P1 Solution Code
+ * @author Juliano Franz
+ *
+ * Creates a Rolodex-like application where users can add, serach and remove entries from it.
+ * The program will use 1D or 2D arrays of Strings (students might have to deal with null pointers)
+ *
+ * The Rolodex will store the name of the contact (or pokemon?) and their phone number.
+ * The maximum ammount of contacts it can store is 256
+ *
+ * Problem 1 is adding and printing to the Rolodex.
+ * Rolodex Operations:
+ *  - 1 : add
+ *  - 2 : search
+ *  - 3 : remove by index
+ *  - 4 : remove by name
+ *  - 5 : print all
+ *  - 0 : exit
+ */
+public class P1 {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+
+        //Lets define the constants for each operation, for now only Add
+        final int ADD_OP = 1;
+        final int PRINT_OP = 5;
+
+        final int ROLODEX_SIZE = 256;
+        //Max size is 256, 2 columns for each entry: name and phone
+        String[][] rolodexData = new String[ROLODEX_SIZE][2];
+        int entryCount = 0;
+
+        System.out.println("Welcome!\nPlease Select an option: ");
+        int selectedOption =  kb.nextInt();
+
+        while (selectedOption != 0) {
+
+            if (selectedOption == ADD_OP) {
+                //We just read an int, therefore we need to get rid of the \n that is left there
+                kb.nextLine();
+
+                if(entryCount == ROLODEX_SIZE){
+                    System.out.println("Rolodex is full!");
+                }
+                else {
+
+                    System.out.println("What's the name? ");
+                    String name = kb.nextLine();
+                    System.out.println("What's the e-mail? ");
+                    String email = kb.nextLine();
+                    rolodexData[entryCount][0] = name;
+                    rolodexData[entryCount][1] = email;
+                    entryCount++;
+
+                }
+            }
+            else if (selectedOption == PRINT_OP) {
+                for (String[] contactEntry : rolodexData) {
+                    if (contactEntry[0] != null) {
+                        System.out.printf("Name: %s\ne-mail: %s\n", contactEntry[0], contactEntry[1]);
+                        System.out.println("--------------------");
+                    }
+                }
+            }
+
+            System.out.println("Please Select an option: ");
+            selectedOption = kb.nextInt();
+
+
+        }
+
+
+        System.out.println("Thank you! Have a nice day!");
+
+
+    }
+
+}
+
+
+import java.util.Scanner;
+
+/**
+ * CSCI 1105 F2020 - A4, P2 Solution Code
+ * @author Juliano Franz
+ *
+ * Creates a Roledex-like application where users can add, serach and remove entries from it.
+ * The program will use 1D or 2D arrays of Strings (students might have to deal with null pointers)
+ *
+ * The Roledex will store the name of the contact (or pokemon?) and their phone number.
+ * The maximum ammount of contacts it can store is 256
+ *
+ * Problem 2 is adding, searching and printing  to the Roledex.
+ * Roledex Operations:
+ *  - 1 : add
+ *  - 2 : search
+ *  - 3 : remove by index
+ *  - 4 : remove by name
+ *  - 5 : print all
+ *  - 0 : exit
+ */
+public class P2 {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+
+        //Lets define the constants for each operation.
+        final int ADD_OP = 1;
+        final int SEARCH_OP = 2;
+        final int PRINT_OP = 5;
+
+
+        final int ROLODEX_SIZE = 256;
+        //Max size is 256, 2 columns for each entry: name and phone
+        String[][] rolodexData = new String[ROLODEX_SIZE][2];
+        int entryCount = 0;
+
+        System.out.println("Welcome!\nPlease Select an option: ");
+        int selectedOption =  kb.nextInt();
+
+        while (selectedOption != 0){
+
+            if (selectedOption == ADD_OP) {
+                //We just read an int, therefore we need to get rid of the \n that is left there
+                kb.nextLine();
+
+                if(entryCount == ROLODEX_SIZE){
+                    System.out.println("Rolodex is full!");
+                }
+                else {
+
+                    System.out.println("What's the name? ");
+                    String name = kb.nextLine();
+                    System.out.println("What's the e-mail? ");
+                    String email = kb.nextLine();
+                    rolodexData[entryCount][0] = name;
+                    rolodexData[entryCount][1] = email;
+                    entryCount++;
+
+                }
+            }
+            else if(selectedOption == SEARCH_OP){
+                //We just read an int, therefore we need to get rid of the \n that is left there
+                kb.nextLine();
+
+                System.out.println("What is the name you are looking for (exact match): ");
+                String name = kb.nextLine();
+                boolean found = false;
+                for (int i = 0; i < rolodexData.length; i++) {
+                    if(rolodexData[i][0] != null && rolodexData[i][0].equals(name)){
+                        System.out.println("E-mail: " + rolodexData[i][1]);
+                        found = true;
+                        break;
+                    }
+                }
+
+                if(!found){
+                    System.out.println("Name not found!");
+                }
+            }
+            else if (selectedOption == PRINT_OP) {
+                for (String[] contactEntry : rolodexData) {
+                    if (contactEntry[0] != null) {
+                        System.out.printf("Name: %s\ne-mail: %s\n", contactEntry[0], contactEntry[1]);
+                        System.out.println("--------------------");
+                    }
+                }
+            }
+
+            System.out.println("Please Select an option: ");
+            selectedOption = kb.nextInt();
+
+        }
+
+
+        System.out.println("Thank you! Have a nice day!");
+
+
+    }
+
+}
+
+
+import java.util.Scanner;
+
+/**
+ * CSCI 1105 F2020 - A4, P3 Solution Code
+ * @author Juliano Franz
+ *
+ * Creates a rolodex-like application where users can add, serach and remove entries from it.
+ * The program will use 1D or 2D arrays of Strings (students might have to deal with null pointers)
+ *
+ * The rolodex will store the name of the contact (or pokemon?) and their phone number.
+ * The maximum ammount of contacts it can store is 256
+ *
+ * Problem 3 is adding, searching, removing and printing  to the rolodex.
+ * rolodex Operations:
+ *  - 1 : add
+ *  - 2 : search
+ *  - 3 : remove by index
+ *  - 4 : remove by name
+ *  - 5 : print all
+ *  - 0 : exit
+ */
+public class P3 {
+    public static void main(String[] args) {
+        Scanner kb = new Scanner(System.in);
+
+        //Lets define the constants for each operation.
+        final int ADD_OP = 1;
+        final int SEARCH_OP = 2;
+        final int REMOVE_INDEX_OP = 3;
+        final int REMOVE_NAME_OP = 4;
+        final int PRINT_OP = 5;
+
+
+        final int ROLODEX_SIZE = 256;
+        //Max size is 256, 2 columns for each entry: name and phone
+        String[][] rolodexData = new String[ROLODEX_SIZE][2];
+        int entryCount = 0;
+
+        System.out.println("Welcome!\nPlease Select an option: ");
+        int selectedOption =  kb.nextInt();
+
+        while (selectedOption != 0){
+
+            if(selectedOption == ADD_OP) {
+                //We just read an int, therefore we need to get rid of the \n that is left there
+                kb.nextLine();
+
+                if(entryCount == ROLODEX_SIZE){
+                    System.out.println("Rolodex is full!");
+                }
+                else {
+
+                    System.out.println("What's the name? ");
+                    String name = kb.nextLine();
+                    System.out.println("What's the e-mail? ");
+                    String email = kb.nextLine();
+                    rolodexData[entryCount][0] = name;
+                    rolodexData[entryCount][1] = email;
+                    entryCount++;
+
+                }
+            }
+            else if(selectedOption == SEARCH_OP){
+                //We just read an int, therefore we need to get rid of the \n that is left there
+                kb.nextLine();
+
+                System.out.println("What is the name you are looking for (exact match): ");
+                String name = kb.nextLine();
+                boolean found = false;
+                for (int i = 0; i < rolodexData.length; i++) {
+                    if(rolodexData[i][0] != null && rolodexData[i][0].equals(name)){
+                        System.out.println("E-mail: " + rolodexData[i][1]);
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found){
+                    System.out.println("Name not found!");
+                }
+            }
+            else if(selectedOption == REMOVE_INDEX_OP){
+                System.out.println("What is the index? ");
+                int index = kb.nextInt();
+
+                for (int i = index; i < entryCount; i++) {
+                    rolodexData[i][0] = rolodexData[i+1][0];
+                    rolodexData[i][1] = rolodexData[i+1][1];
+                }
+                entryCount--;
+
+            }
+            else if(selectedOption == REMOVE_NAME_OP){
+                kb.nextLine();
+                System.out.println("Name to remove (exact match): ");
+                String name = kb.nextLine();
+                boolean found = false;
+                for (int i = 0; i < entryCount; i++) {
+                    if(rolodexData[i][0] != null && rolodexData[i][0].equals(name)){
+
+                        for (int j = i; j < entryCount; j++) {
+                            rolodexData[j][0] = rolodexData[j+1][0];
+                            rolodexData[j][1] = rolodexData[j+1][1];
+                        }
+                        entryCount--;
+                        found = true;
+                        break;
+                    }
+                }
+                if(!found){
+                    System.out.println("Name not found!");
+                }
+
+            }
+            else if(selectedOption == PRINT_OP){
+                for(String[] contactEntry : rolodexData){
+                    if(contactEntry[0] != null) {
+                        System.out.printf("Name: %s\ne-mail: %s\n", contactEntry[0], contactEntry[1]);
+                        System.out.println("--------------------");
+                    }
+                }
+            }
+
+            System.out.println("Please Select an option: ");
+            selectedOption = kb.nextInt();
+
+        }
+
+
+        System.out.println("Thank you! Have a nice day!");
+
+
+    }
+
+}
